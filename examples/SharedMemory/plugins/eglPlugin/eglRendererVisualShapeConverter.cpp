@@ -170,9 +170,9 @@ struct EGLRendererVisualShapeConverterInternalData
 		m_window->setWindowTitle(ci.m_title);
 		b3Assert(glGetError() == GL_NO_ERROR);
 		{
-			printGLString("Version", GL_VERSION);
-			printGLString("Vendor", GL_VENDOR);
-			printGLString("Renderer", GL_RENDERER);
+			// printGLString("Version", GL_VERSION);
+			// printGLString("Vendor", GL_VENDOR);
+			// printGLString("Renderer", GL_RENDERER);
 		}
 		glClearColor(.7f, .7f, .8f, 1.f);
 

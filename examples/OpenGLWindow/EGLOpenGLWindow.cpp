@@ -33,6 +33,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <cstdlib>
 
 #include "OpenGLInclude.h"
 
@@ -125,6 +126,16 @@ void EGLOpenGLWindow::createWindow(const b3gWindowConstructionInfo& ci)
 		printf("eglQueryDevicesEXT Failed.\n");
 		m_data->egl_display = EGL_NO_DISPLAY;
 	}
+
+  // Setting the deivce w.r.t. CUDA_VISIBLE_DEVICES
+  char *devices = getenv("CUDA_VISIBLE_DEVICES");
+  int id = 0;
+  if (devices != NULL) {
+    id = atoi(devices);
+  }
+  m_data->m_renderDevice = id;
+  // printf("Device ID: %d\n", m_data->m_renderDevice);
+
 	// Query EGL Screens
 	if (m_data->m_renderDevice == -1)
 	{
@@ -180,8 +191,8 @@ void EGLOpenGLWindow::createWindow(const b3gWindowConstructionInfo& ci)
 		fprintf(stderr, "Unable to reload EGL.\n");
 		exit(EXIT_FAILURE);
 	}
-	printf("Loaded EGL %d.%d after reload.\n", GLAD_VERSION_MAJOR(egl_version),
-		   GLAD_VERSION_MINOR(egl_version));
+	// printf("Loaded EGL %d.%d after reload.\n", GLAD_VERSION_MAJOR(egl_version),
+	//	   GLAD_VERSION_MINOR(egl_version));
 
 	m_data->success = eglBindAPI(EGL_OPENGL_API);
 	if (!m_data->success)
@@ -240,14 +251,14 @@ void EGLOpenGLWindow::createWindow(const b3gWindowConstructionInfo& ci)
 	}
 
 	const GLubyte* ven = glGetString(GL_VENDOR);
-	printf("GL_VENDOR=%s\n", ven);
+	// printf("GL_VENDOR=%s\n", ven);
 
 	const GLubyte* ren = glGetString(GL_RENDERER);
-	printf("GL_RENDERER=%s\n", ren);
+	// printf("GL_RENDERER=%s\n", ren);
 	const GLubyte* ver = glGetString(GL_VERSION);
-	printf("GL_VERSION=%s\n", ver);
+	// printf("GL_VERSION=%s\n", ver);
 	const GLubyte* sl = glGetString(GL_SHADING_LANGUAGE_VERSION);
-	printf("GL_SHADING_LANGUAGE_VERSION=%s\n", sl);
+	// printf("GL_SHADING_LANGUAGE_VERSION=%s\n", sl);
 	glViewport(0,0,m_data->m_windowWidth, m_data->m_windowHeight);
 	//int i = pthread_getconcurrency();
 	//printf("pthread_getconcurrency()=%d\n", i);
@@ -259,7 +270,7 @@ void EGLOpenGLWindow::closeWindow()
 				   EGL_NO_CONTEXT);
 	eglDestroySurface(m_data->egl_display, m_data->egl_surface);
 	eglDestroyContext(m_data->egl_display, m_data->egl_context);
-	printf("Destroy EGL OpenGL window.\n");
+	// printf("Destroy EGL OpenGL window.\n");
 }
 
 void EGLOpenGLWindow::runMainLoop() {}

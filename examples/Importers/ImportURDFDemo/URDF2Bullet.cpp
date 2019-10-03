@@ -446,7 +446,7 @@ void ConvertURDF2BulletInternal(
 				{
 					if ((jointType == URDFFloatingJoint) || (jointType == URDFPlanarJoint))
 					{
-						printf("Warning: joint unsupported, creating a fixed joint instead.");
+						// printf("Warning: joint unsupported, creating a fixed joint instead.");
 					}
 					creation.addLinkMapping(urdfLinkIndex, mbLinkIndex);
 
