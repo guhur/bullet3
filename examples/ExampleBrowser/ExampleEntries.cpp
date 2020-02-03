@@ -45,6 +45,7 @@
 #include "../DynamicControlDemo/MotorDemo.h"
 #include "../RollingFrictionDemo/RollingFrictionDemo.h"
 #include "../DeformableDemo/DeformableRigid.h"
+#include "../DeformableDemo/SplitImpulse.h"
 #include "../DeformableDemo/ClothFriction.h"
 #include "../DeformableDemo/Pinch.h"
 #include "../DeformableDemo/DeformableSelfCollision.h"
@@ -53,6 +54,8 @@
 #include "../DeformableDemo/VolumetricDeformable.h"
 #include "../DeformableDemo/GraspDeformable.h"
 #include "../DeformableDemo/DeformableContact.h"
+#include "../DeformableDemo/DeformableClothAnchor.h"
+#include "../DeformableDemo/MultibodyClothAnchor.h"
 #include "../SharedMemory/PhysicsServerExampleBullet2.h"
 #include "../SharedMemory/PhysicsServerExample.h"
 #include "../SharedMemory/PhysicsClientExample.h"
@@ -195,9 +198,12 @@ static ExampleEntry gDefaultExamples[] =
         ExampleEntry(1, "Cloth Friction", "Cloth friction contact", ClothFrictionCreateFunc),
         ExampleEntry(1, "Deformable-Deformable Friction Contact", "Deformable friction contact", PinchFrictionCreateFunc),
         ExampleEntry(1, "Deformable-RigidBody Contact", "Deformable test", DeformableRigidCreateFunc),
+        ExampleEntry(1, "Split Impulse Contact", "Split impulse test", SplitImpulseCreateFunc),
         ExampleEntry(1, "Grasp Deformable Cube", "Grasping test", PinchCreateFunc),
         ExampleEntry(1, "Grasp Deformable with Motor", "Grasping test", GraspDeformableCreateFunc),
         ExampleEntry(1, "Volumetric Deformable Objects", "Volumetric Deformable test", VolumetricDeformableCreateFunc),
+        ExampleEntry(1, "Rigid Cloth Anchor", "Deformable Rigid body Anchor test", DeformableClothAnchorCreateFunc),
+        ExampleEntry(1, "Multibody Cloth Anchor", "Deformable Multibody Anchor test", MultibodyClothAnchorCreateFunc),
         ExampleEntry(1, "Deformable-MultiBody Contact", "MultiBody and Deformable contact", DeformableMultibodyCreateFunc),
         // ExampleEntry(1, "MultiBody Baseline", "MultiBody Baseline", MultiBodyBaselineCreateFunc),
         
@@ -297,6 +303,7 @@ static ExampleEntry gDefaultExamples[] =
 		ExampleEntry(1, "Rolling friction", "Experiment on multibody rolling friction", R2D2GraspExampleCreateFunc, eROBOTIC_LEARN_ROLLING_FRICTION),
 		ExampleEntry(1, "Gripper Grasp", "Grasp experiment with a gripper to improve contact model", GripperGraspExampleCreateFunc, eGRIPPER_GRASP),
 		ExampleEntry(1, "Two Point Grasp", "Grasp experiment with two point contact to test rolling friction", GripperGraspExampleCreateFunc, eTWO_POINT_GRASP),
+		ExampleEntry(1, "Grasp Deformable Cloth", "Grasp experiment with deformable cloth", GripperGraspExampleCreateFunc, eGRASP_DEFORMABLE_CLOTH),
 		ExampleEntry(1, "One Motor Gripper Grasp", "Grasp experiment with a gripper with one motor to test slider constraint for closed loop structure", GripperGraspExampleCreateFunc, eONE_MOTOR_GRASP),
 #ifndef SKIP_SOFT_BODY_MULTI_BODY_DYNAMICS_WORLD
 		ExampleEntry(1, "Grasp Soft Body", "Grasp soft body experiment", GripperGraspExampleCreateFunc, eGRASP_SOFT_BODY),

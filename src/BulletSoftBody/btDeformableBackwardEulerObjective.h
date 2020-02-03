@@ -20,6 +20,7 @@
 #include "btDeformableMassSpringForce.h"
 #include "btDeformableGravityForce.h"
 #include "btDeformableCorotatedForce.h"
+#include "btDeformableLinearElasticityForce.h"
 #include "btDeformableNeoHookeanForce.h"
 #include "btDeformableContactProjection.h"
 #include "btPreconditioner.h"
@@ -78,7 +79,7 @@ public:
     void updateVelocity(const TVStack& dv);
     
     //set constraints as projections
-    void setConstraints();
+    void setConstraints(const btContactSolverInfo& infoGlobal);
     
     // update the projections and project the residual
     void project(TVStack& r)

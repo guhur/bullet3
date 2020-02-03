@@ -231,7 +231,7 @@ void Pinch::initPhysics()
     btVector3 gravity = btVector3(0, -10, 0);
 	m_dynamicsWorld->setGravity(gravity);
     getDeformableDynamicsWorld()->getWorldInfo().m_gravity = gravity;
-    
+	getDeformableDynamicsWorld()->getWorldInfo().m_sparsesdf.setDefaultVoxelsz(0.25);
     getDeformableDynamicsWorld()->setSolverCallback(dynamics);
 	m_guiHelper->createPhysicsDebugDrawer(m_dynamicsWorld);
 
@@ -314,6 +314,7 @@ void Pinch::initPhysics()
         psb->m_cfg.kDF = 2;
         psb->m_cfg.collisions = btSoftBody::fCollision::SDF_RD;
         getDeformableDynamicsWorld()->addSoftBody(psb);
+        btSoftBodyHelpers::generateBoundaryFaces(psb);
         
         btDeformableMassSpringForce* mass_spring = new btDeformableMassSpringForce(1,0.05);
         getDeformableDynamicsWorld()->addForce(psb, mass_spring);
